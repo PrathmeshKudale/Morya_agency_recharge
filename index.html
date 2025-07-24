@@ -7,43 +7,30 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
       margin: 0;
       padding: 0;
-      background: #f5f7fa;
-      color: #333;
     }
 
     header {
       background: #4a00e0;
-      background: linear-gradient(to right, #8e2de2, #4a00e0);
       color: white;
       padding: 20px;
       text-align: center;
     }
 
-    header h1 {
+    h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 26px;
     }
 
     .container {
+      max-width: 450px;
+      margin: 20px auto;
       padding: 20px;
-      max-width: 480px;
-      margin: auto;
-    }
-
-    .card {
       background: white;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      margin-bottom: 20px;
-    }
-
-    .card h2 {
-      margin-top: 0;
-      font-size: 20px;
-      color: #4a00e0;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     form {
@@ -53,9 +40,9 @@
 
     input, select, button {
       padding: 12px;
+      font-size: 16px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      font-size: 16px;
     }
 
     button {
@@ -67,53 +54,38 @@
     }
 
     button:hover {
-      background: #3b00b0;
+      background: #3a00b0;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .qr-section {
       text-align: center;
+      display: none;
     }
 
-    .service {
-      background: #f0ecff;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #4a00e0;
+    .qr-section img {
+      width: 220px;
+      margin-top: 20px;
     }
 
-    .contact, .footer {
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .footer {
-      margin-top: 30px;
-    }
-
-    .whatsapp {
-      position: fixed;
-      right: 15px;
-      bottom: 15px;
-      background-color: #25D366;
-      color: white;
-      padding: 12px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    .upi-info {
       font-size: 16px;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
-    @media (max-width: 480px) {
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .confirm-button {
+      margin-top: 20px;
+      background-color: green;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 10px;
+      background: #eaffea;
+      border: 1px solid #b6eab6;
+      border-radius: 8px;
+      color: #267a26;
+      display: none;
     }
   </style>
 </head>
@@ -121,68 +93,46 @@
 
   <header>
     <h1>Morya Recharge</h1>
-    <p>Fast | Secure | Easy</p>
+    <p>Recharge & Pay Instantly</p>
   </header>
 
   <div class="container">
-    <div class="card">
-      <h2>Recharge Mobile</h2>
-      <form onsubmit="rechargeNow(event)">
-        <input type="text" name="mobile" placeholder="Enter Mobile Number" maxlength="10" pattern="\d{10}" required />
-        <select name="operator" required>
-          <option value="">Select Operator</option>
-          <option value="Jio">Jio</option>
-          <option value="Airtel">Airtel</option>
-          <option value="Vi">Vi</option>
-          <option value="BSNL">BSNL</option>
-        </select>
-        <input type="number" name="amount" placeholder="Enter Amount ₹" required min="1" />
-        <button type="submit">Recharge Now</button>
-      </form>
+    <form id="rechargeForm" onsubmit="showQR(event)">
+      <input type="text" name="mobile" placeholder="Enter Mobile Number" maxlength="10" pattern="\d{10}" required />
+      <select name="operator" required>
+        <option value="">Select Operator</option>
+        <option value="Jio">Jio</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Vi">Vi</option>
+        <option value="BSNL">BSNL</option>
+      </select>
+      <input type="number" name="amount" placeholder="Enter Amount ₹" required min="1" />
+      <button type="submit">Recharge Now</button>
+    </form>
+
+    <div class="qr-section" id="qrSection">
+      <h3>Step 2: Pay to UPI</h3>
+      <img src="qr.jpg" alt="Pay UPI QR" />
+      <div class="upi-info">UPI ID: <span style="color:#4a00e0;">kudaleprajakta2801@okicici</span></div>
+      <p>Please scan the QR or send amount manually.</p>
+      <button class="confirm-button" onclick="confirmPaid()">✅ I Have Paid</button>
     </div>
 
-    <div class="card">
-      <h2>Popular Services</h2>
-      <div class="services-grid">
-        <div class="service">📱 Recharge</div>
-        <div class="service">📺 DTH</div>
-        <div class="service">💳 Postpaid</div>
-        <div class="service">⚡ Electricity</div>
-        <div class="service">🏦 AEPS</div>
-        <div class="service">💸 Money Txfr</div>
-      </div>
-    </div>
-
-    <div class="card contact">
-      <h2>Need Help?</h2>
-      <p>📞 7262822323</p>
-      <p>📍 Jejuri, Dhalewadi Road</p>
-    </div>
-
-    <div class="footer">
-      © <span id="year"></span> Morya Agency. All rights reserved.
+    <div class="message" id="thankYou">
+      ✅ Thank you! We have received your request.<br/>Your recharge will be processed shortly.
     </div>
   </div>
 
-  <a class="whatsapp" href="https://wa.me/917262822323" target="_blank">💬 WhatsApp</a>
-
   <script>
-    function rechargeNow(event) {
+    function showQR(event) {
       event.preventDefault();
-      const form = event.target;
-      const mobile = form.mobile.value;
-      const operator = form.operator.value;
-      const amount = form.amount.value;
-
-      if (mobile.length === 10 && /^\d+$/.test(mobile)) {
-        alert(`Recharge Request Sent!\n\nMobile: ${mobile}\nOperator: ${operator}\nAmount: ₹${amount}`);
-        form.reset();
-      } else {
-        alert("Please enter valid mobile number");
-      }
+      document.getElementById("qrSection").style.display = "block";
+      document.getElementById("thankYou").style.display = "none";
     }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    function confirmPaid() {
+      document.getElementById("thankYou").style.display = "block";
+    }
   </script>
 
 </body>
