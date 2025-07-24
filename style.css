@@ -1,45 +1,34 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  background: white;
+.recharge-form {
+  background: #ffffff;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 300px;
   text-align: center;
 }
 
-input, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.recharge-form form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  gap: 15px;
 }
 
-button {
-  background-color: #007bff;
+.recharge-form input,
+.recharge-form select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.recharge-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #e60000;
   color: white;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
-}
-
-.success {
-  color: green;
-  margin-top: 10px;
+.recharge-form button:hover {
+  background-color: #b80000;
 }
