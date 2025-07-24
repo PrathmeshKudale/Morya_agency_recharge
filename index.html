@@ -1,22 +1,103 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Morya Agency - Multi Recharge</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Morya Recharge App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #e60000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    input, select, button {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #e60000;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b80000;
+    }
+
+    .services, .contact {
+      margin-top: 30px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .service {
+      background: #ffeaea;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Morya Logo" class="logo" />
+    <img src="logo.png" alt="Logo" class="logo" />
     <h1>Morya Agency</h1>
-    <p>Your Trusted Multi Recharge Partner</p>
+    <p>Multi Recharge Partner</p>
   </header>
 
-  <section class="recharge-form">
+  <div class="container">
     <h2>Recharge Now</h2>
-    <form onsubmit="return handleRecharge(event)">
+    <form onsubmit="handleRecharge(event)">
       <input type="text" name="mobile" placeholder="Enter 10-digit Mobile Number" maxlength="10" required pattern="\d{10}" />
       <select name="operator" required>
         <option value="">Select Operator</option>
@@ -25,63 +106,45 @@
         <option value="vi">Vi (Vodafone Idea)</option>
         <option value="bsnl">BSNL</option>
       </select>
-      <input type="number" name="amount" placeholder="Enter Amount ₹" required min="1" />
+      <input type="number" name="amount" placeholder="Amount ₹" required min="1" />
       <button type="submit">Recharge Now</button>
     </form>
-  </section>
 
-  <section class="services">
-    <h2>Our Services</h2>
-    <div class="service-grid">
-      <div class="service">📱 Mobile Recharge</div>
-      <div class="service">📺 DTH Recharge</div>
-      <div class="service">💳 Postpaid Bill</div>
-      <div class="service">🧾 Electricity Bill</div>
-      <div class="service">🏦 AEPS (Aadhaar ATM)</div>
-      <div class="service">💸 Money Transfer</div>
+    <div class="services">
+      <h2>Services</h2>
+      <div class="service-grid">
+        <div class="service">📱 Mobile Recharge</div>
+        <div class="service">📺 DTH</div>
+        <div class="service">💳 Postpaid</div>
+        <div class="service">🧾 Electricity</div>
+        <div class="service">🏦 AEPS</div>
+        <div class="service">💸 Money Transfer</div>
+      </div>
     </div>
-  </section>
 
-  <section class="history">
-    <h2>Recharge History (Demo)</h2>
-    <table>
-      <thead>
-        <tr><th>Mobile</th><th>Operator</th><th>Amount</th><th>Status</th></tr>
-      </thead>
-      <tbody id="history">
-        <tr><td>9876543210</td><td>Jio</td><td>₹199</td><td>Success</td></tr>
-      </tbody>
-    </table>
-  </section>
+    <div class="contact">
+      <h2>Contact Us</h2>
+      <p><strong>Address:</strong> Dhalewadi Road, Jejuri</p>
+      <p><strong>Phone:</strong> <a href="tel:7262822323">7262822323</a></p>
+    </div>
 
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p><strong>📍 Address:</strong> Dhalewadi Road, Jejuri</p>
-    <p><strong>📞 Phone:</strong> <a href="tel:7262822323">7262822323</a></p>
-  </section>
-
-  <a href="https://wa.me/917262822323" class="whatsapp-button" target="_blank">💬 Chat on WhatsApp</a>
-
-  <footer>
-    <p>© <span id="year"></span> Morya Agency. All rights reserved.</p>
-  </footer>
+    <div class="footer">
+      © <span id="year"></span> Morya Agency. All rights reserved.
+    </div>
+  </div>
 
   <script>
     function handleRecharge(event) {
       event.preventDefault();
-      const mobile = event.target.mobile.value;
-      const operator = event.target.operator.value;
-      const amount = event.target.amount.value;
-      if (mobile.length === 10) {
-        alert(`Recharge request submitted:\nMobile: ${mobile}\nOperator: ${operator}\nAmount: ₹${amount}`);
-        // For demo: you can push to history table here if needed.
-      } else {
-        alert("Please enter a valid 10-digit number.");
-      }
-    }
+      const form = event.target;
+      const mobile = form.mobile.value;
+      const operator = form.operator.value;
+      const amount = form.amount.value;
 
-    // Set current year
-    document.getElementById("year").innerText = new Date().getFullYear();
-  </script>
-</body>
-</html>
+      if (mobile.length !== 10 || !/^\d+$/.test(mobile)) {
+        alert("Enter a valid 10-digit mobile number.");
+        return;
+      }
+
+      alert(`Recharge Request Sent\n\nMobile: ${mobile}\nOperator: ${operator}\nAmount: ₹${amount}`);
+      form
