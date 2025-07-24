@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  color: #333;
+}
+
+header {
+  background-color: #e60000;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.services {
+  padding: 30px;
+  text-align: center;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.service {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 18px;
+}
+
+.contact {
+  background: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.recharge-form {
+  background: #ffffff;
+  padding: 30px;
+  text-align: center;
+}
+
+.recharge-form form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  gap: 15px;
+}
+
+.recharge-form input,
+.recharge-form select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.recharge-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #e60000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.recharge-form button:hover {
+  background-color: #b80000;
+}
