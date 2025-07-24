@@ -14,18 +14,30 @@
 
   <section class="recharge-form">
     <h2>Recharge Now</h2>
-    <form action="#" method="POST">
-      <input type="text" name="mobile" placeholder="Enter Mobile Number" required />
-      <select name="operator" required>
-        <option value="">Select Operator</option>
-        <option value="jio">Jio</option>
-        <option value="airtel">Airtel</option>
-        <option value="vi">Vi (Vodafone Idea)</option>
-        <option value="bsnl">BSNL</option>
-      </select>
-      <input type="number" name="amount" placeholder="Enter Amount ₹" required />
-      <button type="submit">Recharge Now</button>
-    </form>
+    <form onsubmit="sendToWhatsApp(); return false;">
+  <input type="text" id="mobile" placeholder="Enter Mobile Number" required />
+  <select id="operator" required>
+    <option value="">Select Operator</option>
+    <option value="Jio">Jio</option>
+    <option value="Airtel">Airtel</option>
+    <option value="Vi">Vi</option>
+    <option value="BSNL">BSNL</option>
+  </select>
+  <input type="number" id="amount" placeholder="Enter Amount ₹" required />
+  <button type="submit">Recharge Now</button>
+</form>
+
+<script>
+  function sendToWhatsApp() {
+    var mobile = document.getElementById("mobile").value;
+    var operator = document.getElementById("operator").value;
+    var amount = document.getElementById("amount").value;
+
+    var message = `Recharge Request:\n📱 Mobile: ${mobile}\n📡 Operator: ${operator}\n💸 Amount: ₹${amount}`;
+    var whatsappURL = `https://wa.me/917262822323?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+  }
+</script>
   </section>
 
   <section class="services">
