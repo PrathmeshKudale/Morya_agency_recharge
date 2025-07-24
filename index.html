@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Recharge</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Morya Agency - Multi Recharge</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h2>Recharge</h2>
-    <form id="rechargeForm">
-      <input type="text" id="rechargeName" placeholder="Your Name" readonly />
-      <input type="number" id="amount" placeholder="Enter Amount" required />
-      <button type="submit">Recharge</button>
-      <p id="success" class="success"></p>
+  <header>
+    <h1>Morya Agency</h1>
+    <p>Your Trusted Multi Recharge Partner</p>
+  </header>
+
+  <section class="recharge-form">
+    <h2>Recharge Now</h2>
+    <form action="#" method="POST">
+      <input type="text" name="mobile" placeholder="Enter Mobile Number" required />
+      <select name="operator" required>
+        <option value="">Select Operator</option>
+        <option value="jio">Jio</option>
+        <option value="airtel">Airtel</option>
+        <option value="vi">Vi (Vodafone Idea)</option>
+        <option value="bsnl">BSNL</option>
+      </select>
+      <input type="number" name="amount" placeholder="Enter Amount ₹" required />
+      <button type="submit">Recharge Now</button>
     </form>
-  </div>
-  <script src="script.js"></script>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service">📱 Mobile Recharge</div>
+      <div class="service">📺 DTH Recharge</div>
+      <div class="service">💳 Postpaid Bill</div>
+      <div class="service">🧾 Electricity Bill</div>
+      <div class="service">🏦 AEPS (Aadhaar ATM)</div>
+      <div class="service">💸 Money Transfer</div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p><strong>📍 Address:</strong> Dhalewadi Road, Jejuri</p>
+    <p><strong>📞 Phone:</strong> 7262822323</p>
+  </section>
+
+  <footer>
+    <p>© 2016-2025 Morya Agency. All rights reserved.</p>
+  </footer>
 </body>
 </html>
