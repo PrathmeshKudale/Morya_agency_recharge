@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,14 +9,15 @@
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Morya Logo" class="logo" />
     <h1>Morya Agency</h1>
     <p>Your Trusted Multi Recharge Partner</p>
   </header>
 
   <section class="recharge-form">
     <h2>Recharge Now</h2>
-    <form action="#" method="POST">
-      <input type="text" name="mobile" placeholder="Enter Mobile Number" required />
+    <form onsubmit="return handleRecharge(event)">
+      <input type="text" name="mobile" placeholder="Enter 10-digit Mobile Number" maxlength="10" required pattern="\d{10}" />
       <select name="operator" required>
         <option value="">Select Operator</option>
         <option value="jio">Jio</option>
@@ -23,7 +25,7 @@
         <option value="vi">Vi (Vodafone Idea)</option>
         <option value="bsnl">BSNL</option>
       </select>
-      <input type="number" name="amount" placeholder="Enter Amount ₹" required />
+      <input type="number" name="amount" placeholder="Enter Amount ₹" required min="1" />
       <button type="submit">Recharge Now</button>
     </form>
   </section>
@@ -40,14 +42,46 @@
     </div>
   </section>
 
+  <section class="history">
+    <h2>Recharge History (Demo)</h2>
+    <table>
+      <thead>
+        <tr><th>Mobile</th><th>Operator</th><th>Amount</th><th>Status</th></tr>
+      </thead>
+      <tbody id="history">
+        <tr><td>9876543210</td><td>Jio</td><td>₹199</td><td>Success</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="contact">
     <h2>Contact Us</h2>
     <p><strong>📍 Address:</strong> Dhalewadi Road, Jejuri</p>
-    <p><strong>📞 Phone:</strong> 7262822323</p>
+    <p><strong>📞 Phone:</strong> <a href="tel:7262822323">7262822323</a></p>
   </section>
 
+  <a href="https://wa.me/917262822323" class="whatsapp-button" target="_blank">💬 Chat on WhatsApp</a>
+
   <footer>
-    <p>© 2016-2025 Morya Agency. All rights reserved.</p>
+    <p>© <span id="year"></span> Morya Agency. All rights reserved.</p>
   </footer>
+
+  <script>
+    function handleRecharge(event) {
+      event.preventDefault();
+      const mobile = event.target.mobile.value;
+      const operator = event.target.operator.value;
+      const amount = event.target.amount.value;
+      if (mobile.length === 10) {
+        alert(`Recharge request submitted:\nMobile: ${mobile}\nOperator: ${operator}\nAmount: ₹${amount}`);
+        // For demo: you can push to history table here if needed.
+      } else {
+        alert("Please enter a valid 10-digit number.");
+      }
+    }
+
+    // Set current year
+    document.getElementById("year").innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>
