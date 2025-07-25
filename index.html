@@ -4,137 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Morya Recharge</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #4a00e0;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 26px;
-    }
-
-    .container {
-      max-width: 450px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    form {
-      display: grid;
-      gap: 12px;
-    }
-
-    input, select, button {
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background: #4a00e0;
-      color: white;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #3a00b0;
-    }
-
-    .qr-section {
-      text-align: center;
-      display: none;
-    }
-
-    .qr-section img {
-      width: 220px;
-      margin-top: 20px;
-    }
-
-    .upi-info {
-      font-size: 16px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .confirm-button {
-      margin-top: 20px;
-      background-color: green;
-    }
-
-    .message {
-      margin-top: 20px;
-      padding: 10px;
-      background: #eaffea;
-      border: 1px solid #b6eab6;
-      border-radius: 8px;
-      color: #267a26;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <header>
-    <h1>Morya Recharge</h1>
-    <p>Recharge & Pay Instantly</p>
-  </header>
-
   <div class="container">
-    <form id="rechargeForm" onsubmit="showQR(event)">
-      <input type="text" name="mobile" placeholder="Enter Mobile Number" maxlength="10" pattern="\d{10}" required />
-      <select name="operator" required>
-        <option value="">Select Operator</option>
-        <option value="Jio">Jio</option>
-        <option value="Airtel">Airtel</option>
-        <option value="Vi">Vi</option>
-        <option value="BSNL">BSNL</option>
+    <h1>Morya Recharge</h1>
+
+    <form id="rechargeForm">
+      <label for="number">Mobile Number</label>
+      <input type="text" id="number" required maxlength="10" />
+
+      <label for="operator">Select Operator</label>
+      <select id="operator" onchange="loadPlans()" required>
+        <option value="">--Choose--</option>
+        <option value="jio">Jio</option>
+        <option value="airtel">Airtel</option>
+        <option value="vi">VI</option>
+        <option value="bsnl">BSNL</option>
       </select>
-      <input type="number" name="amount" placeholder="Enter Amount ₹" required min="1" />
+
+      <label for="plan">Select Plan</label>
+      <select id="plan" required>
+        <option value="">--Select Operator First--</option>
+      </select>
+
       <button type="submit">Recharge Now</button>
     </form>
-
-    <div class="qr-section" id="qrSection">
-      <h3>Step 2: Pay to UPI</h3>
-      <img src="qr.jpg" alt="Pay UPI QR" />
-      <div class="upi-info">UPI ID: <span style="color:#4a00e0;">.......
-      .</span></div>
-      <p>Please scan the QR or send amount manually.</p>
-      <button class="confirm-button" onclick="confirmPaid()">✅ I Have Paid</button>
-    </div>
-
-    <div class="message" id="thankYou">
-      ✅ Thank you! We have received your request.<br/>Your recharge will be processed shortly.
-    </div>
   </div>
 
   <script>
-    function showQR(event) {
-      event.preventDefault();
-      document.getElementById("qrSection").style.display = "block";
-      document.getElementById("thankYou").style.display = "none";
+    const plans = {
+      jio: [
+        { amount: 239, description: "28 Days" },
+        { amount: 479, description: "56 Days" }
+      ],
+      airtel: [
+        { amount: 299, description: "28 Days" },
+        { amount: 719, description: "84 Days" }
+      ],
+      vi: [
+        { amount: 245, description: "28 Days" },
+        { amount: 459, description: "56 Days" }
+      ],
+      bsnl: [
+        { amount: 197, description: "28 Days" },
+        { amount: 485, description: "90 Days" }
+      ]
+    };
+
+    function loadPlans() {
+      const operator = document.getElementById("operator").value;
+      const planSelect = document.getElementById("plan");
+      planSelect.innerHTML = "";
+
+      if (plans[operator]) {
+        plans[operator].forEach(plan => {
+          const option = document.createElement("option");
+          option.value = plan.amount;
+          option.textContent = `₹${plan.amount} - ${plan.description}`;
+          planSelect.appendChild(option);
+        });
+      } else {
+        const option = document.createElement("option");
+        option.textContent = "--Select Operator First--";
+        planSelect.appendChild(option);
+      }
     }
 
-    function confirmPaid() {
-      document.getElementById("thankYou").style.display = "block";
-    }
+    document.getElementById("rechargeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const number = document.getElementById("number").value;
+      const amount = document.getElementById("plan").value;
+
+      const upiURL = `upi://pay?pa=ozagade8@ybl&pn=MoryaRecharge&am=${amount}&cu=INR&tn=Recharge%20for%20${number}`;
+
+      window.location.href = upiURL; // Redirect to UPI app
+    });
   </script>
-
 </body>
 </html>
