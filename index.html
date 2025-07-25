@@ -2,19 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Morya Agency - Login</title>
+  <title>Morya Agency - Admin Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f2f5;
+    }
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #2196F3;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .login-box button:hover {
+      background: #1976D2;
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>🔐 Morya Agency Login</h2>
-    <form id="loginForm">
-      <input type="text" placeholder="Enter Mobile Number" required>
-      <input type="password" placeholder="Enter Password" required>
-      <button type="submit">Login</button>
-    </form>
-    <p class="footer-text">Recharge with trust ⚡</p>
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <input type="text" id="mobile" placeholder="Mobile Number">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
   </div>
+
+  <script>
+    function login() {
+      const mobile = document.getElementById('mobile').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      if (mobile === "7262822323" && pass === "1234") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        alert("❌ Invalid mobile number or password");
+      }
+    }
+  </script>
 </body>
 </html>
