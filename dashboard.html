@@ -14,10 +14,10 @@
       💼 Wallet Balance: ₹<span id="wallet">0.00</span>
     </div>
 
-    <form id="rechargeForm">
-      <input id="number" type="text" placeholder="Enter Mobile Number" required>
+    <form class="recharge-form">
+      <input type="text" placeholder="Enter Mobile Number" required>
 
-      <select id="operator" required>
+      <select required>
         <option value="">Select Operator</option>
         <option value="Jio">Jio</option>
         <option value="Airtel">Airtel</option>
@@ -25,7 +25,7 @@
         <option value="BSNL">BSNL</option>
       </select>
 
-      <input id="amount" type="number" placeholder="Enter Recharge Amount" required>
+      <input type="number" placeholder="Enter Recharge Amount" required>
       <button type="submit">Recharge Now</button>
     </form>
 
@@ -36,20 +36,5 @@
 
     <button class="logout">🔓 Logout</button>
   </div>
-
-  <script>
-    document.getElementById('rechargeForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const number = document.getElementById('number').value;
-      const operator = document.getElementById('operator').value;
-      const amount = document.getElementById('amount').value;
-
-      const upiLink = `upi://pay?pa=ozagade8@ybl&pn=MoryaAgency&cu=INR&am=${amount}&tn=Recharge%20for%20${number}%20(${operator})`;
-      window.location.href = upiLink;
-
-      alert("After payment, please wait while admin processes your recharge.");
-    });
-  </script>
 </body>
 </html>
